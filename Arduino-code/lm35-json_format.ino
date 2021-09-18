@@ -11,6 +11,12 @@ int pin4 = A3;
 int pin5 = A4;
 int pin6 = A5;
 
+unsigned long currentTime;
+unsigned long lastTime;
+unsigned long delayTime = 20;
+
+
+
 int incomingByte = 0; // for incoming serial data
 
 // aqui
@@ -38,7 +44,8 @@ void do_staf(int n_samples, int inf ) {
   // Serial.println(n_samples);
   // Serial.println(inf);
   Serial.println("START_DATA");
-  delay(1000);
+  currentTime = millis();
+  lastTime = currentTime; 
   while (1){
     StaticJsonDocument<500> doc_send;
     // StaticJsonDocument<200> doc_1;
@@ -238,6 +245,9 @@ void setup() {
   pinMode(13, OUTPUT);
   i=0;
   j=0;
+  
+  currentTime = millis();
+  lastTime = currentTime; 
 }
 
 void loop() {
