@@ -1,0 +1,67 @@
+{% extends "base/layout.html" %}
+
+{% block content %}
+
+<div id="page-wrapper">
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">Descrição da experiencia</h1>
+      </div>
+</div>
+
+  <section class="intro">
+    <figure class="">
+      <img
+        src="{{ url_for('static', filename='Images/pendulo.png') }}"
+        alt="Limo Gt"
+        width="450"
+        height="180">
+    </figure>
+    <br>
+    <h3 id="about-the-Monte-Carlo">Experiencia de Pendulo </h3>
+    <p>
+    Com este aplicação <strong>FLASK</strong>, pode se realizar a experiência de pendulo gravitico. Para efeito
+    deve-se seguir os seguintes passos:
+    <ul>
+      <li>
+        Prencher os inputs (l - comprimento inicial e N - número de amostras a recolher) na tab <strong>controller</strong>
+      </li>
+      <li>
+        Submeter o pedido clicando no botão "play" e ver começar a receber os dados em tempo real na tab <strong>Results</strong>
+      </li>
+    </ul>
+    <br>
+    <h2> Detalhes do Pendulo</h2>
+  
+    <table class="table table-striped" id="owned_stock_table">
+      <thead>
+      <tr>
+      <th>Nome</th>
+      <th>Caracteristica</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+  
+      <td>Massa da esfera</td>
+      <td> 2kg + </td> </tr>
+      <tr>
+      <td>Comprimento do cabo</td>
+      <td>xx +</td> </tr>
+      <td>Diametro da esfera</td>
+      <td>xx +</td> </tr>
+  
+  
+      </tr>
+      </tbody>
+      </table>
+  </section>
+
+  </div>
+  
+{% endblock %}
+
+<!-- fim-->
+
+            
+           

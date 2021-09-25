@@ -1,0 +1,33 @@
+{% extends "base/layout.html" %}
+{% block page_title %}
+
+    temperature graphic
+
+{% endblock %}
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Gráfico da Temperatura </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div id='myplot2' style="margin-left: 10px; width: 800px; height: 500px;"></div>
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    //Attempt to get the element using document.getElementById
+    var element = document.getElementById("myplot2");
+ 
+    //If it isn't "undefined" and it isn't "null", then it exists.
+    if(typeof(element) != 'undefined' && element != null){
+        alert('Element exists!');
+    } else{
+        alert('Element does not exist!');
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base/layout.html" %}
+{% block page_title %}
+
+    temperature graphic
+
+{% endblock %}
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Gráfico da velocidade linear </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>Velocidade linear em função do número de amostras</span>
+                </div>
+                <div class="panel-body">
+                    <div id="myplot"
+                         style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='base/js/elab-control.js') }}"></script>
+<script>
+    
+    //Attempt to get the element using document.getElementById
+    var element = document.getElementById("myplot");
+ 
+    //If it isn't "undefined" and it isn't "null", then it exists.
+    if(typeof(element) != 'undefined' && element != null){
+        alert('Element exists!');
+    } else{
+        alert('Element does not exist!');
+    }
+</script>
+{% endblock %}
+    
+
+
+<!--
+
+        <br>
+                    <div id='myplot1' style="margin-left: 10px; width: 800px; height: 500px;"></div>
+                 <br>
+                   <div id='myplot2' style="margin-left: 10px; width: 800px; height: 500px;"></div>
+             </div>
+
+
+
+
+
+-->
