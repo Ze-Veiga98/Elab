@@ -5,6 +5,7 @@ import os
 from app.views.main.main import *
 
 """
+### Pa .não sei se vou fazer o user. LACK OF TIME
 Blueprints: Are a way to organize our project. So to put it simpler, is a means to organize our project in folders 
 In python each folder is a module.
 The blueprint that i plain to implement in this app are:
