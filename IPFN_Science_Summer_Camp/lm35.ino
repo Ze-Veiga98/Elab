@@ -25,54 +25,54 @@ void loop(){
 
     // Convert the voltage into the temperature in degree Celsius:
     float temperature1 = average1(pin1);
-    //float temperature2 = average1(pin2);
-    //float temperature3 = average1(pin3);
-   // float temperature4 = average1(pin4);
-    /*float temperature5 = average1(pin5);
-    float temperature6 = average1(pin6);*/
+    float temperature2 = average1(pin2);
+    float temperature3 = average1(pin3);
+    float temperature4 = average1(pin4);
+    float temperature5 = average1(pin5);
+    //float temperature6 = average1(pin6);
 
     // Print the temperature in the Serial Monitor:
-    //Serial.print("T1 = ");
+    Serial.print("T1 = ");
     Serial.print(temperature1);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-   // Serial.print("C");
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
     Serial.println(",");
 
-    //Serial.print("T2 = ");
-   // Serial.print(temperature2);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-    //Serial.print("C");
-    //Serial.print(",");
+    Serial.print("T2 = ");
+    Serial.print(temperature2);
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
+    Serial.print(",");
 
-    //Serial.print("T3 = ");
-    //Serial.print(temperature3);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-    //Serial.print("C");
-   // Serial.print(",");
+    Serial.print("T3 = ");
+    Serial.print(temperature3);
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
+    Serial.print(",");
 
-    //Serial.print("T4 = ");
-    //Serial.print(temperature4);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-    //Serial.print("C");
-   // Serial.println(",");
+    Serial.print("T4 = ");
+    Serial.print(temperature4);
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
+    Serial.println(",");
 
-    //Serial.print("T5 = ");
-    //Serial.print(temperature5);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-    //Serial.print("C");
-    //Serial.println(",");
+    Serial.print("T5 = ");
+    Serial.print(temperature5);
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
+    Serial.println(",");
 
-    //Serial.print("T6 = ");
-    //Serial.print(temperature6);
-    //Serial.print(" \xC2\xB0"); // shows degree symbol
-    //Serial.print("C");
-    //Serial.println(",");
+    Serial.print("T6 = ");
+    Serial.print(temperature6);
+    Serial.print(" \xC2\xB0"); // shows degree symbol
+    Serial.print("C");
+    Serial.println(",");
 
-   
-    while(millis() < time_now + period){
+   // usar isso ou delay para acelerar o processo
+    /*while(millis() < time_now + period){
         //wait approx. [period] ms
-    }
-    //delay(1000); // wait a second between readings
+    }*/
+    delay(1000); // wait a second between readings
 
 }
 
