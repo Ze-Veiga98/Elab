@@ -47,26 +47,54 @@
              
                
              <hr>
+            
              <div class="sansserif">
              <button id="button_start_pendulo" class="btn btn-default" onclick="start_Pendulum()">AutoPlay</button>
-             <button id="resetBtn"  type="reset" value="Reset" onclick="set_reset()">Reset </button>
+             <button id="resetBtn"  type="reset" value="Reset" onclick="set_reset()">Reset </button> 
+             <br>
+             <br>
+
+             
+                   
+               
+            
+             <hr>
 
              <div id='myplot' style="margin-left: 10px; width: 800px; height: 500px;"></div>
              <!--<div id='myplot1' style="margin-left: 10px; width: 800px; height: 500px;"></div>-->
              <div id='myplot2' style="margin-left: 10px; width: 800px; height: 500px;"></div>
 
-           
+             <div id="result"></div>	
+
+
+          
+      
+
+        <style>
+
+       table, tr, td {
+        border:1px solid #999;
+        width: 50%;
+        }
+        th {
+        background: #f1f1f1;
+        font-weight: bold;
+        padding: 6px;
+       }
+       td {
+    background: #f9f9f9;
+    padding: 6px;
+    }
+        </style>
 </div>
 
-
- 
 
 
 
 {% endblock %}
         
-{% block scripts %}
-    <script src="{{ url_for('static', filename='base/js/elab-control.js') }}"></script>
+{% block style %}
+    <script src="{{ url_for('static', filename='base/css/main.css') }}"></script>
 {% endblock %}
 
 
