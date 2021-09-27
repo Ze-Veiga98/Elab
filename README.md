@@ -4,7 +4,12 @@ Personnaly I will be working together with Pedro Rosa at ISTTOK guided by profes
 The core objective of this project is to develop a web-based interface capable of the IPFN's teams can control and perform the experiment.
 
 # Back-end
-
+Temperature calibration
+ 1. run the getTemperature-calibration-measurement.ino
+ 2. paste to getTemperature-calibration_demo.ino and run the calibration.
+ 3. run getTemperature.ino to read the temperature. 
 
 # Front-end
+
+
 
