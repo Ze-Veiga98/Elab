@@ -4,7 +4,8 @@ The code provided by the manufactures for the temperature calibration are on the
 The code that I used for the data acquision are here.
 ``` c++
 groove.ino
-
+lm35-json_format.ino
+lm35.ino
 
 ```
 
