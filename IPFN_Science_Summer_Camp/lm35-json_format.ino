@@ -1,15 +1,21 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include "High_Temp.h"  // groove 
 
 // Number of samples to be averaged over 
 int N = 100; 
 // Define to which pins  of the arduino the output of the LM35 (temperature sensor) are connect
-int pin1 = A0;
-int pin2 = A1;
+//int pin1 = A0;
+//int pin2 = A1;
 int pin3 = A2;
 int pin4 = A3;
 int pin5 = A4;
 int pin6 = A5;
+
+// Groove high temperature 
+HighTemp ht(A1,A0);
+//HightTemp ht2(A5
+
 
 int incomingByte = 0; // for incoming serial data
 
@@ -230,6 +236,8 @@ void Brian(JsonDocument& doc_rec)
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("grove - hight temperature sensor test demo");
+  ht.begin();
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
@@ -247,8 +255,8 @@ void loop() {
    StaticJsonDocument<500> doc_rec;
     // StaticJsonDocument<200> doc_1;
     doc_send["sample"] = i;
-    doc_send["temp_top"] = average1(pin1);
-    doc_send["temp_bot"] = average1(pin2);
+    doc_send["temp_top"] = ht.getThmc(); // grove conenct to (A1,A0)
+    //doc_send["temp_bot"] = average1(pin2);
     doc_send["temp_in"] = average1(pin3);
     doc_send["temp_north"] = average1(pin4);
     doc_send["temp_south"] = average1(pin5);
@@ -287,10 +295,11 @@ void loop() {
 
 // Pode ser que va ter alterções aqui 
 // average temperature
+// 
 float average1(int pin){
   float sum = 0.0;
   for (int i =0; i < N ; i++){
-    sum += analogRead(pin)*(5/(1023*0.01));
+    sum += analogRead(pin)*(5/(1023*0.01)); // as from datasheet 
   }
     return sum/N;
   
