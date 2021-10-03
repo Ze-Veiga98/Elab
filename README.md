@@ -1,3 +1,7 @@
+# Notice 
+I also added a new folder called 'simple-flask' -> in whcih you can find a more simple flask app similar to the one done in Monte Carlo.
+
+
 # How to run this app?
 1. Download it!
 2. Install all the packages using pip install -r install-me-first.txt
