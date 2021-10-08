@@ -1,4 +1,4 @@
-var base_url = "http://127.0.0.1:8001";
+var base_url = "http://127.0.0.1:5000";
 let Results=0;
 var DeltaX=0;
 var Samples=0;
@@ -9,6 +9,8 @@ var frist=0;
 var point_x;
 var point_y;
 var output_data = [];
+var receive_error_velocity = [];
+var receive_error_period = [];
 
 var DeltaX = document.getElementById('DeltaX');
 var Samples = document.getElementById('Samples');
@@ -45,7 +47,6 @@ function start_Pendulum() {
 var mytable = [];
 
 
-
 function getData(){
   var endpoint =  base_url + '/resultpoint';
   $.ajax({
@@ -58,7 +59,7 @@ function getData(){
 			res = Object.keys(response.Data);
       
 			buildPlot1(res);
-      //buildPlot2(res);  // grafico de temperatura não 
+      buildPlot2(res);  // grafico de temperatura não 
       buildPlot3(res);
 			frist = 1;
 		}
@@ -70,12 +71,16 @@ function getData(){
        
         if (typeof response.Data === 'object'){
           
+          receive_error_velocity = response.Data.e_velocity;
+          receive_error_period = response.Data.e_period;
           
-          Plotly.extendTraces('myplot', {x: [[response.Data.Sample_number]],y: [[response.Data.velocity]]}, [0]);
-          //Plotly.extendTraces('myplot1', {x: [[response.Data.e_period]],y: [[response.Data.period]]}, [0]);
-          Plotly.extendTraces('myplot2', {x: [[response.Data.e_velocity]],y: [[response.Data.velocity]]}, [0]);
-          //console.log('ola:'+ response.Data.Sample_number);
-          //console.log('ola:'+ response.Data.);
+          Plotly.extendTraces('myplot', {x: [[response.Data.Sample_number]],y: [[response.Data.velocity]],
+            'error_y.array': [[ receive_error_velocity ]]}, [0]);
+          Plotly.extendTraces('myplot1', {x: [[response.Data.period]]}, [0]);
+          Plotly.extendTraces('myplot2', {x: [[response.Data.Sample_number]],y: [[response.Data.period]],
+          'error_y.array': [[receive_error_period]]}, [0]);
+    
+          // tabela 
           mytable.push(response.Data);
          // create a table
           var html = "<table>";
@@ -175,7 +180,30 @@ function tablebind() {
 
 var point_x;
 var point_y;
-//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+//////////// Build graphic                    
+/////////////////////////////////////////////////////////////////////////////////
+
+var selectorOptions = {
+
+  buttons: [{
+
+      step: '1',
+
+      stepmode: 'backward',
+
+      count: 1,
+
+      label: '10N'
+
+  },{
+
+      step: 'all',
+
+  }],
+
+};
+
 
 function buildPlot1(res) {
 
@@ -183,11 +211,31 @@ function buildPlot1(res) {
   var trace1 = {
 		x: [],
 		y: [],
+    error_y: {
+      type: 'data',
+      color: '#85144B',
+      array: [],
+      thickness: 1.5,
+      width:3,
+      visible: true
+    },
     mode: 'lines+markers',
-		line: {
+    line: {
+      color: "#1f77b4", 
+      width: 1
+    },marker: {
+      color: "rgb(0, 255, 255)", 
+      size: 6, 
+      line: {
+        color: "black", 
+        width: 0.5
+      }
+    },
+    type:"scatter",
+		/*line: {
 		  color: '#80CAF6',
 		  shape: 'linear'
-		},
+		},*/
 		
 		name: res[1]
 	  };
@@ -209,15 +257,19 @@ function buildPlot1(res) {
                   color: 'black',
                   size: 14
                   },
-                  rangemode: 'tozero'
+                 howticklabels: false
+                 // rangemode: 'tozero'
+                
+                 //rangeslider: {}
             },
       yaxis: {
             title: 'velocidade linear[m/s]',
+            fixedrange: true,
             titlefont:{
                   color: 'black',
                   size: 14
-                  },
-                  rangemode: 'tozero'
+                  }
+                 // rangemode: 'tozero'
             }
      };
 
@@ -239,15 +291,27 @@ function myStopFunction() {
 function buildPlot2(res) {
   console.log(res);
   var trace2 = {
+    // no histograma so é x ou é y.
 		x: [],
-		y: [],
+		//y: [],
     name:'Histograma de Periodo de movimento',
-    mode: 'lines+markers',
-    type: 'bar',
+    visible: true,
+   // mode: 'lines+markers',
+    type: 'histogram',
+    xbins: {
+
+      end: 1000, 
+  
+      size: 0.06, 
+  
+      start: .5
+  
+    },
 		line: {
 		  color: '#80CAF6',
 		  shape: 'linear'
 		},
+    opacity:0.5,
 		
 		name: res[2]
 	  };
@@ -255,8 +319,11 @@ function buildPlot2(res) {
     var output_data = [trace2];
 
     var layout = {
-      title: '',
+      title: 'Histograma de Periodo de movimento',
       height: 500, // os valores são todos em pixels
+      bargap: 0.05, 
+  bargroupgap: 0.2,
+     
       font: {
       family: 'Lato',
       size: 16,
@@ -269,8 +336,8 @@ function buildPlot2(res) {
             titlefont:{
                   color: 'black',
                   size: 14
-                  },
-                  rangemode: 'tozero'
+                  }
+                //  rangemode: 'tozero'
             },
       yaxis: {
         //range:[0.19,0.21],
@@ -278,8 +345,8 @@ function buildPlot2(res) {
             titlefont:{
                   color: 'black',
                   size: 14
-                  },
-                  rangemode: 'tozero'
+                  }
+                 // rangemode: 'tozero'
             }
      };
 
@@ -293,12 +360,27 @@ function buildPlot3(res) {
   var trace3 = {
 		x: [],
 		y: [],
+    error_y: {
+      type: 'data',
+      color: '#85144B',
+      array: [],
+      thickness: 1.5,
+      width:3,
+      visible: true
+    },
     mode: 'lines+markers',
-    type: 'histogram',
-		line: {
-		  color: '#80CAF6',
-		  shape: 'linear'
-		},
+    line: {
+      color: "#1f77b4", 
+      width: 1
+    },marker: {
+      color: "rgb(0, 255, 255)", 
+      size: 6, 
+      line: {
+        color: "black", 
+        width: 0.5
+      }
+    },
+    type:"scatter",
 		
 		name: res[3]
 	  };
@@ -306,7 +388,7 @@ function buildPlot3(res) {
     var output_data = [trace3];
 
     var layout = {
-      title: 'Histograma de Periodo de movimento',
+      title: 'Periodo em função do número de amostras',
       height: 500, // os valores são todos em pixels
       font: {
       family: 'Lato',
@@ -316,21 +398,21 @@ function buildPlot3(res) {
 
       xaxis: {
             
-            title: 'periodo[s]',
+            title: 'Amostra[N]',
             titlefont:{
                   color: 'black',
                   size: 14
-                  },
-                  rangemode: 'tozero'
+                  }
+                //  rangemode: 'tozero'
             },
       yaxis: {
         //range:[0.19,0.21],
-            title: '# de Eventos',
+            title: 'Periodo[s]',
             titlefont:{
                   color: 'black',
                   size: 14
-                  },
-                  rangemode: 'tozero'
+                  }
+                  //rangemode: 'tozero'
             }
      };
 
